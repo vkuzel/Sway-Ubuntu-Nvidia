@@ -40,8 +40,14 @@ install_dependencies() {
 clone_repositories() {
   rm -rf sway
 
-  git clone https://github.com/swaywm/sway.git
-  git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
+  local cacheName='cached-sway.tmp'
+  if [[ -d "$cacheName" ]]; then
+    cp -R "$cacheName" sway
+  else
+    git clone https://github.com/swaywm/sway.git
+    git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
+    cp -R sway "$cacheName"
+  fi
 }
 
 checkout_version() {
