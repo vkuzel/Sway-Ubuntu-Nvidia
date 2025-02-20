@@ -61,7 +61,8 @@ checkout_version() {
 }
 
 patch_repositories() {
-  patch sway/subprojects/wlroots/render/gles2/pass.c nvidia.patch
+#  patch sway/subprojects/wlroots/render/gles2/pass.c nvidia.patch
+  cp -Rf patch/* sway
 }
 
 build() {
