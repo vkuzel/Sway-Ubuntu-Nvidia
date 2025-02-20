@@ -42,9 +42,9 @@ clone_repositories() {
 
   git clone https://github.com/swaywm/sway.git
   git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
+}
 
-  patch sway/subprojects/wlroots/render/gles2/pass.c nvidia.patch
-
+checkout_version() {
   pushd sway
   git checkout "$sway_version"
   popd
@@ -52,6 +52,10 @@ clone_repositories() {
   pushd sway/subprojects/wlroots
   git checkout "$wlroots_version"
   popd
+}
+
+patch_repositories() {
+  patch sway/subprojects/wlroots/render/gles2/pass.c nvidia.patch
 }
 
 build() {
@@ -63,4 +67,6 @@ build() {
 
 install_dependencies
 clone_repositories
+checkout_version
+patch_repositories
 build
