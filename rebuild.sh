@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sway_version=1.9
+wlroots_version=0.17.4
+
 install_dependencies() {
   sudo apt install \
     glslang-tools \
@@ -33,10 +36,16 @@ install_dependencies() {
 
 close_repositories() {
   rm -rf sway
+
   git clone https://github.com/swaywm/sway.git
+  git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
 
   pushd sway
-  git clone https://gitlab.freedesktop.org/wlroots/wlroots.git subprojects/wlroots
+  git checkout "$sway_version"
+  popd
+
+  pushd sway/subprojects/wlroots
+  git checkout "$wlroots_version"
   popd
 }
 
@@ -49,5 +58,4 @@ build() {
 
 install_dependencies
 close_repositories
-
 build
