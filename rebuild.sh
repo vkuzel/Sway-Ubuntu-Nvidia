@@ -1,7 +1,10 @@
 #!/bin/bash
 
-sway_version=1.9
-wlroots_version=0.17.4
+#sway_version=1.9
+#wlroots_version=0.17.4
+
+sway_version=1.10
+wlroots_version=0.18.2
 
 install_dependencies() {
   sudo apt install \
