@@ -39,3 +39,7 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+# build dir
+/sway
+
