@@ -34,7 +34,7 @@ install_dependencies() {
     wayland-protocols
 }
 
-close_repositories() {
+clone_repositories() {
   rm -rf sway
 
   git clone https://github.com/swaywm/sway.git
@@ -59,5 +59,5 @@ build() {
 }
 
 install_dependencies
-close_repositories
+clone_repositories
 build
