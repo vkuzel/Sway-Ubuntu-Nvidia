@@ -40,6 +40,8 @@ close_repositories() {
   git clone https://github.com/swaywm/sway.git
   git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
 
+  patch sway/subprojects/wlroots/render/gles2/pass.c nvidia.patch
+
   pushd sway
   git checkout "$sway_version"
   popd
