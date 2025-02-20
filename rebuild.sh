@@ -71,7 +71,7 @@ build() {
   popd
 }
 
-install_dependencies
+#install_dependencies
 clone_repositories
 checkout_version
 patch_repositories
