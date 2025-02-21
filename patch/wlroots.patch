@@ -1,0 +1,38 @@
+diff --git a/backend/wayland/meson.build b/backend/wayland/meson.build
+index fcf9fdd8..0a6d4fbf 100644
+--- a/backend/wayland/meson.build
++++ b/backend/wayland/meson.build
+@@ -1,6 +1,6 @@
+ wayland_client = dependency('wayland-client',
+ 	fallback: 'wayland',
+-	default_options: wayland_project_options,
++	default_options: [],
+ )
+ wlr_deps += wayland_client
+ 
+diff --git a/meson.build b/meson.build
+index f36411d9..c7c3f0be 100644
+--- a/meson.build
++++ b/meson.build
+@@ -5,7 +5,7 @@ project(
+ 	license: 'MIT',
+ 	meson_version: '>=0.59.0',
+ 	default_options: [
+-		'c_std=' + (meson.version().version_compare('>=1.3.0') ? 'c23,c11' : 'c11'),
++		'c_std=' + (meson.version().version_compare('>=1.3.0') ? 'c17,c11' : 'c11'),
+ 		'warning_level=2',
+ 		'werror=true',
+ 	],
+diff --git a/render/gles2/pass.c b/render/gles2/pass.c
+index 9177b0a1..2af0b5d1 100644
+--- a/render/gles2/pass.c
++++ b/render/gles2/pass.c
+@@ -36,7 +36,7 @@ static bool render_pass_submit(struct wlr_render_pass *wlr_pass) {
+ 		clock_gettime(CLOCK_MONOTONIC, &timer->cpu_end);
+ 	}
+ 
+-	glFlush();
++	glFinish();
+ 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+ 
+ 	pop_gles2_debug(renderer);

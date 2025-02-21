@@ -77,8 +77,11 @@ checkout_version() {
 }
 
 patch_repositories() {
-#  patch sway/subprojects/wlroots/render/gles2/pass.c nvidia.patch
-  cp -Rf patch/* sway
+  work_dir="$(dirname "$(realpath "$0")")"
+
+  pushd sway/subprojects/wlroots
+  git apply "$work_dir/patch/wlroots.patch"
+  popd
 }
 
 build() {
