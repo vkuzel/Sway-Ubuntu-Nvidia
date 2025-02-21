@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Vulkan doesn't output to external monitors
-export WLR_RENDERER=vulkan
+export WLR_RENDERER=auto
 #export WLR_RENDERER=gles2
 #export WLR_RENDERER=pixman
 
