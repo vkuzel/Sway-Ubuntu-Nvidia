@@ -5,6 +5,12 @@
 
 sway_version=1.10
 wlroots_version=0.18.2
+wayland_version=1.23.1
+wayland_protocols_version=1.35
+
+# to resolve locally installed libraries like libinput
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 install_dependencies() {
   sudo apt install \
@@ -46,6 +52,8 @@ clone_repositories() {
   else
     git clone https://github.com/swaywm/sway.git
     git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
+    git clone https://gitlab.freedesktop.org/wayland/wayland sway/subprojects/wayland
+    git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git sway/subprojects/wayland-protocols
     cp -R sway "$cacheName"
   fi
 }
@@ -58,6 +66,14 @@ checkout_version() {
   pushd sway/subprojects/wlroots
   git checkout "$wlroots_version"
   popd
+
+  pushd sway/subprojects/wayland
+  git checkout "$wayland_version"
+  popd
+
+  pushd sway/subprojects/wayland-protocols
+  git checkout "$wayland_protocols_version"
+  popd
 }
 
 patch_repositories() {
@@ -67,7 +83,7 @@ patch_repositories() {
 
 build() {
   pushd sway
-  meson build/
+  meson setup build/
   ninja -C build/
   popd
 }
