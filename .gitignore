@@ -42,4 +42,4 @@ out/
 
 # build dir
 /sway
-
+/libinput
