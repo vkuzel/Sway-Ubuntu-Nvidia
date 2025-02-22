@@ -17,7 +17,15 @@ install_dependencies() {
 
 clone_repositories() {
   rm -rf libinput
-  git clone https://gitlab.freedesktop.org/libinput/libinput.git libinput
+
+  local cacheName='cache.tmp/libinput'
+  if [[ -d "$cacheName" ]]; then
+    cp -R "$cacheName" libinput
+  else
+    git clone https://gitlab.freedesktop.org/libinput/libinput.git libinput
+    mkdir -p "$cacheName"
+    cp -R libinput "$cacheName"
+  fi
 }
 
 checkout_version() {

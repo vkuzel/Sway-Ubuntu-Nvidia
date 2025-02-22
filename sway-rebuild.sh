@@ -46,7 +46,7 @@ install_dependencies() {
 clone_repositories() {
   rm -rf sway
 
-  local cacheName='cached-sway.tmp'
+  local cacheName='cache.tmp/sway'
   if [[ -d "$cacheName" ]]; then
     cp -R "$cacheName" sway
   else
@@ -54,6 +54,7 @@ clone_repositories() {
     git clone https://gitlab.freedesktop.org/wlroots/wlroots.git sway/subprojects/wlroots
     git clone https://gitlab.freedesktop.org/wayland/wayland sway/subprojects/wayland
     git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git sway/subprojects/wayland-protocols
+    mkdir -p "$cacheName"
     cp -R sway "$cacheName"
   fi
 }
